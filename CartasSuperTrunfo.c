@@ -13,23 +13,25 @@ int main() {
     char estado1;
     char codigo1[4];
     char cidade1[50];
-    int populacao1;
+    unsigned long int populacao1;
     float area1;
     float pib1;
     int pontos1;
     float densidade1;
     float pibPerCapita1;
+    float superPoder1;
 
     /* Carta 2 */
     char estado2;
     char codigo2[4];
     char cidade2[50];
-    int populacao2;
+    unsigned long int populacao2;
     float area2;
     float pib2;
     int pontos2;
     float densidade2;
     float pibPerCapita2;
+    float superPoder2;
 
     /* ======================
        Leitura dos dados - Carta 1
@@ -46,7 +48,7 @@ int main() {
     scanf(" %[^\n]", cidade1);
 
     printf("Populacao: ");
-    scanf("%d", &populacao1);
+    scanf("%lu", &populacao1);
 
     printf("Area (km²): ");
     scanf("%f", &area1);
@@ -58,8 +60,16 @@ int main() {
     scanf("%d", &pontos1);
 
     /* Cálculos da Carta 1 */
-    densidade1 = populacao1 / area1;
-    pibPerCapita1 = pib1 / populacao1;
+    densidade1 = (float)populacao1 / area1;
+    pibPerCapita1 = pib1 / (float)populacao1;
+
+    superPoder1 =
+        (float)populacao1 +
+        area1 +
+        pib1 +
+        pontos1 +
+        pibPerCapita1 +
+        (1.0f / densidade1);
 
     /* ======================
        Leitura dos dados - Carta 2
@@ -76,7 +86,7 @@ int main() {
     scanf(" %[^\n]", cidade2);
 
     printf("Populacao: ");
-    scanf("%d", &populacao2);
+    scanf("%lu", &populacao2);
 
     printf("Area (km²): ");
     scanf("%f", &area2);
@@ -88,37 +98,42 @@ int main() {
     scanf("%d", &pontos2);
 
     /* Cálculos da Carta 2 */
-    densidade2 = populacao2 / area2;
-    pibPerCapita2 = pib2 / populacao2;
+    densidade2 = (float)populacao2 / area2;
+    pibPerCapita2 = pib2 / (float)populacao2;
+
+    superPoder2 =
+        (float)populacao2 +
+        area2 +
+        pib2 +
+        pontos2 +
+        pibPerCapita2 +
+        (1.0f / densidade2);
 
     /* ======================
-       Exibição dos dados
+       Comparações
+       ====================== */
+    int popVence = populacao1 > populacao2;
+    int areaVence = area1 > area2;
+    int pibVence = pib1 > pib2;
+    int pontosVence = pontos1 > pontos2;
+    int densidadeVence = densidade1 < densidade2; /* menor vence */
+    int pibPerCapitaVence = pibPerCapita1 > pibPerCapita2;
+    int superPoderVence = superPoder1 > superPoder2;
+
+    /* ======================
+       Exibição das comparações
        ====================== */
     printf("\n=========================\n");
-    printf("        Carta 1\n");
+    printf("Comparacao de Cartas\n");
     printf("=========================\n");
-    printf("Estado: %c\n", estado1);
-    printf("Codigo: %s\n", codigo1);
-    printf("Nome da Cidade: %s\n", cidade1);
-    printf("Populacao: %d\n", populacao1);
-    printf("Area: %.2f km²\n", area1);
-    printf("PIB: %.2f bilhoes de reais\n", pib1);
-    printf("Numero de Pontos Turisticos: %d\n", pontos1);
-    printf("Densidade Populacional: %.2f hab/km²\n", densidade1);
-    printf("PIB per Capita: %.2f reais\n", pibPerCapita1);
 
-    printf("\n=========================\n");
-    printf("        Carta 2\n");
-    printf("=========================\n");
-    printf("Estado: %c\n", estado2);
-    printf("Codigo: %s\n", codigo2);
-    printf("Nome da Cidade: %s\n", cidade2);
-    printf("Populacao: %d\n", populacao2);
-    printf("Area: %.2f km²\n", area2);
-    printf("PIB: %.2f bilhoes de reais\n", pib2);
-    printf("Numero de Pontos Turisticos: %d\n", pontos2);
-    printf("Densidade Populacional: %.2f hab/km²\n", densidade2);
-    printf("PIB per Capita: %.2f reais\n", pibPerCapita2);
+    printf("Populacao: Carta 1 venceu (%d)\n", popVence);
+    printf("Area: Carta 1 venceu (%d)\n", areaVence);
+    printf("PIB: Carta 1 venceu (%d)\n", pibVence);
+    printf("Pontos Turisticos: Carta 1 venceu (%d)\n", pontosVence);
+    printf("Densidade Populacional: Carta 1 venceu (%d)\n", densidadeVence);
+    printf("PIB per Capita: Carta 1 venceu (%d)\n", pibPerCapitaVence);
+    printf("Super Poder: Carta 1 venceu (%d)\n", superPoderVence);
 
     return 0;
 }
