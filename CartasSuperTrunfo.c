@@ -28,7 +28,7 @@ int main() {
     int pontos2;
 
     /* ======================
-       Leitura dos dados - Carta 1
+       Leitura de dados - Carta 1
        ====================== */
     printf("=== Cadastro da Carta 1 ===\n");
 
@@ -54,7 +54,7 @@ int main() {
     scanf("%d", &pontos1);
 
     /* ======================
-       Leitura dos dados - Carta 2
+       Leitura de dados - Carta 2
        ====================== */
     printf("\n=== Cadastro da Carta 2 ===\n");
 
